@@ -12,7 +12,7 @@ __doc__ = """
 """
 
 with DAG(
-        'ohad',
+        'ohad_first',
         # These args will get passed on to each operator
         # You can override them on a per-task basis during operator initialization
         default_args={
