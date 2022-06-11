@@ -17,3 +17,6 @@ dagit -p 3001 -f jobs/hello_cereal.py
 - Go to the UI at `http://localhost:3001/`
 - Go to the `Launchpad` tab
 - Trigger the job
+
+### Test the Job
+- Run `pytest`
