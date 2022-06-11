@@ -67,26 +67,21 @@ def get_data():
                 )
             conn.commit()
 
-#     @task
-#     def merge_data():
-#         query = """
-#             INSERT INTO employees
-#             SELECT *
-#             FROM (
-#                 SELECT DISTINCT *
-#                 FROM employees_temp
-#             )
-#             ON CONFLICT ("Serial Number") DO UPDATE
-#             SET "Serial Number" = excluded."Serial Number";
-#         """
-#         try:
-#             postgres_hook = PostgresHook(postgres_conn_id="tutorial_pg_conn")
-#             conn = postgres_hook.get_conn()
-#             cur = conn.cursor()
-#             cur.execute(query)
-#             conn.commit()
-#             return 0
-#         except Exception as e:
-#             return 1
-#
-#     [create_employees_table, create_employees_temp_table] >> get_data() >> merge_data()
+
+def merge_data():
+    with psycopg2.connect(
+        host="localhost",
+        port="5436"
+    ) as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+            INSERT INTO employees
+            SELECT *
+            FROM (
+                SELECT DISTINCT *
+                FROM employees_temp
+            )
+            ON CONFLICT ("Serial Number") DO UPDATE
+            SET "Serial Number" = excluded."Serial Number";
+            """)
+            conn.commit()
