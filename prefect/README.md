@@ -1,0 +1,1 @@
+- Start the server with custom ports: `prefect server start --postgres-port 5435 --ui-port 8083`
