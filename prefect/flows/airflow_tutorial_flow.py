@@ -20,21 +20,26 @@ def create_employees_table():
             conn.commit()
 
 
-#
-#     create_employees_temp_table = PostgresOperator(
-#         task_id="create_employees_temp_table",
-#         postgres_conn_id="tutorial_pg_conn",
-#         sql="""
-#             DROP TABLE IF EXISTS employees_temp;
-#             CREATE TABLE employees_temp (
-#                 "Serial Number" NUMERIC PRIMARY KEY,
-#                 "Company Name" TEXT,
-#                 "Employee Markme" TEXT,
-#                 "Description" TEXT,
-#                 "Leave" INTEGER
-#             );""",
-#     )
-#
+@task
+def create_employees_temp_table():
+    with psycopg2.connect(
+        host="localhost",
+        port="5436"
+    ) as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+             DROP TABLE IF EXISTS employees_temp;
+             CREATE TABLE employees_temp (
+                 "Serial Number" NUMERIC PRIMARY KEY,
+                 "Company Name" TEXT,
+                 "Employee Markme" TEXT,
+                 "Description" TEXT,
+                 "Leave" INTEGER
+             );""")
+            conn.commit()
+
+
+
 #     @task
 #     def get_data():
 #         # NOTE: configure this as appropriate for your airflow environment
