@@ -65,7 +65,6 @@ def ohad_second():
             )
         conn.commit()
 
-
     @task
     def merge_data():
         query = """
