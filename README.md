@@ -4,8 +4,8 @@ Showcase of the following ETL orchestration tools:
 - [X] Airflow
 - [X] Prefect
 - [X] Dagster
-- [] Luigi
-- [] Argo
+- [ ] Luigi
+- [ ] Argo
 
 ## Criteria for comparison
 Fill me in please...
